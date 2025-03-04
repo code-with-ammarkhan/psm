@@ -1,10 +1,14 @@
 import re 
 import streamlit as st
 
-#Page Styling
+# Page Styling
 st.set_page_config(
-    page_title="Password Strength Checker By Code With Ammar", page_icon="🛅", layout="center")
-#Custom CSS
+    page_title="Password Strength Checker By Code With Ammar", 
+    page_icon="🛅", 
+    layout="centered"  # ✅ Fixed: "center" -> "centered"
+)
+
+# Custom CSS
 st.markdown("""
 <style>
     .main {text-align: center;}
@@ -14,23 +18,25 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-#Page Title and Description
-st.title("🔐 Password Strength Generator")
-st.write("Enter your  password below to check its security level. 🔎")
+# Page Title and Description
+st.title("🔐 Password Strength Checker")
+st.write("Enter your password below to check its security level. 🔎")
 
-# function to check password strength
+# Function to check password strength
 def check_password_strength(password):
     score = 0
     feedback = []
 
     if len(password) >= 8:
-        score += 1  # increased score by 1
+        score += 1  # Increased score by 1
     else:
         feedback.append("❌ Password should be **at least 8 characters long**.")
+    
     if re.search(r'[a-z]', password) and re.search(r'[A-Z]', password):
         score += 1
     else:
-        feedback.append("❌ Password should include **atleast both upper case (A-Z) and lower case (a-z) letters** ")
+        feedback.append("❌ Password should include **both uppercase (A-Z) and lowercase (a-z) letters**.")
+    
     if re.search(r"\d", password):
         score += 1
     else:
@@ -42,30 +48,29 @@ def check_password_strength(password):
     else:
         feedback.append("❌ Password should include **at least one special character (e.g., !@#$%^&*()_+{}[]:;<>,.?~-)**.")
 
-    #Display Password Strength
+    # Display Password Strength
     if score >= 4:
-        st.success("✅ **Strong Password** - your password is very strong and secure! 💪")
+        st.success("✅ **Strong Password** - Your password is very strong and secure! 💪")
     elif score == 3:
         st.info("⚠️ **Moderate Password** - Consider adding more characters for better security ⚒️")
     else:
         st.error("❌ **Weak Password** - Please make your password stronger! 💔")
 
-    #Display Feedback
+    # Display Feedback
     if feedback:
-     with  st.expander("🔄 **Improve Your Password** :"):
-         for item in feedback:
-             st.write(item)
+        with st.expander("🔄 **Improve Your Password** :"):
+            for item in feedback:
+                st.write(item)
 
-#Password Input
+# Password Input
 password = st.text_input("Enter your password here: ", type="password", help="Ensure your password is strong and secure! 🔐")
 
-#Button Working
+# Button Working
 if st.button("Check Password Strength"):
     if password:
         check_password_strength(password)
     else:
-        st.error("🚫  Please enter a password first! ❗") #Show warning if  password is empty
-
+        st.error("🚫 Please enter a password first! ❗")  # Show warning if password is empty
 
 # Footer
 st.markdown(
