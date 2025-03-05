@@ -8,33 +8,33 @@ st.set_page_config(
     layout="centered"
 )
 
-# Custom CSS for Animation
+# Background Image CSS
 st.markdown(
-    """
+    f"""
     <style>
-    @keyframes moveText {
-        0% { transform: translateX(-10px); }
-        50% { transform: translateX(10px); }
-        100% { transform: translateX(-10px); }
-    }
+    .stApp {{
+        background: url("/mnt/data/A_high-quality_3D-rendered_image_of_a_futuristic_d.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }}
 
-    .animated-heading {
+    @keyframes moveText {{
+        0% {{ transform: translateX(-10px); }}
+        50% {{ transform: translateX(10px); }}
+        100% {{ transform: translateX(-10px); }}
+    }}
+
+    .animated-heading {{
         text-align: center;
-        font-size: 28px;
+        font-size: 32px;
         font-weight: bold;
         animation: moveText 2s infinite alternate ease-in-out;
-        color: #333;
-    }
+    }}
 
-    .stTextInput {width: 60% !important; margin: auto; }
-    .stButton button {
-        width: 50%;
-        background-color: #4CAF50;
-        color: white;
-        font-size: 16px;
-        border-radius: 8px;
-    }
-    .stButton button:hover { background-color: #45a049; }
+    .stTextInput {{ width: 60% !important; margin: auto; }}
+    .stButton button {{ width: 50%; background-color: #4CAF50; color: white; font-size: 18px; }}
+    .stButton button:hover {{ background-color: #45a049; }}
     </style>
     """,
     unsafe_allow_html=True
@@ -45,7 +45,7 @@ st.markdown("<h1 class='animated-heading'>🔐 Password Strength Checker</h1>", 
 
 # Centered Subtitle
 st.markdown(
-    "<h4 style='text-align: center; font-size: 16px; font-weight: bold;'>"
+    "<h4 style='text-align: center; font-size: 18px; font-weight: bold;'>"
     "Enter your password below to check its security level. 🔎"
     "</h4>", 
     unsafe_allow_html=True
@@ -111,13 +111,13 @@ st.markdown(
         text-align: center;
         margin-top: 50px;
         padding: 20px;
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 900;
     }
     
     .footer b {
         display: inline-block;
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 900;
         animation: gradientText 2s infinite alternate;
     }
