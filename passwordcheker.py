@@ -1,5 +1,6 @@
 import re
 import streamlit as st
+import base64
 
 # Set Page Configuration
 st.set_page_config(
@@ -8,11 +9,22 @@ st.set_page_config(
     layout="centered"
 )
 
+# Function to Convert Image to Base64
+def get_base64(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
+# Path of Uploaded Image
+image_path = "/mnt/data/A_high-tech_abstract_background_featuring_a_glowin.png"
+
+# Encode Image to Base64
+image_base64 = get_base64(image_path)
+
 # Custom CSS for Background Image
 page_bg_img = f"""
 <style>
     .stApp {{
-        background-image: url("https://img.freepik.com/free-vector/secure-technology-abstract-background_23-2148331625.jpg?semt=ais_hybrid");
+        background-image: url("data:image/png;base64,{image_base64}");
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
