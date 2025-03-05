@@ -1,5 +1,14 @@
 import re
 import streamlit as st
+import base64
+
+# Function to Convert Image to Base64
+def get_base64(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
+# Load Background Image
+image_base64 = get_base64("/mnt/data/A_high-quality_3D-rendered_image_of_a_futuristic_d.png")
 
 # Page Styling
 st.set_page_config(
@@ -13,7 +22,7 @@ st.markdown(
     f"""
     <style>
     .stApp {{
-        background: url("/mnt/data/A_high-quality_3D-rendered_image_of_a_futuristic_d.png");
+        background-image: url("data:image/png;base64,{image_base64}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
