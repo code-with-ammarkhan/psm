@@ -1,4 +1,4 @@
-import re 
+import re
 import streamlit as st
 
 # Page Styling
@@ -8,19 +8,35 @@ st.set_page_config(
     layout="centered"
 )
 
-# Custom CSS
-st.markdown("""
-<style>
-    .main {text-align: center;}
+# Custom CSS for Animation
+st.markdown(
+    """
+    <style>
+    @keyframes moveText {
+        0% { transform: translateX(-10px); }
+        50% { transform: translateX(10px); }
+        100% { transform: translateX(-10px); }
+    }
+
+    .animated-heading {
+        text-align: center;
+        font-size: 32px;
+        font-weight: bold;
+        animation: moveText 2s infinite alternate ease-in-out;
+    }
+
     .stTextInput {width: 60% !important; margin: auto; }
     .stButton button {width: 50%; background-color: #4CAF50; color: white; font-size: 18px; }
-    .stButton button:hover { background-color: #45a049;}
-</style>
-""", unsafe_allow_html=True)
+    .stButton button:hover { background-color: #45a049; }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-# Page Title and Centered Description 
-st.title("🔐 Password Strength Checker")
+# Animated Page Title
+st.markdown("<h1 class='animated-heading'>🔐 Password Strength Checker</h1>", unsafe_allow_html=True)
 
+# Centered Subtitle
 st.markdown(
     "<h4 style='text-align: center; font-size: 18px; font-weight: bold;'>"
     "Enter your password below to check its security level. 🔎"
@@ -28,14 +44,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-
 # Function to check password strength
 def check_password_strength(password):
     score = 0
     feedback = []
 
     if len(password) >= 8:
-        score += 1  # Increased score by 1
+        score += 1  
     else:
         feedback.append("❌ Password should be **at least 8 characters long**.")
     
@@ -49,13 +64,11 @@ def check_password_strength(password):
     else:
         feedback.append("❌ Password should contain **at least one number (0-9)**.")
 
-    # Check for Special Characters
     if re.search(r"[!@#$%^&*()_+{}\[\]:;<>,.?~\\]", password):
         score += 1
     else:
         feedback.append("❌ Password should include **at least one special character (e.g., !@#$%^&*()_+{}[]:;<>,.?~-)**.")
 
-    # Display Password Strength
     if score >= 4:
         st.success("✅ **Strong Password** - Your password is very strong and secure! 💪")
     elif score == 3:
@@ -63,7 +76,6 @@ def check_password_strength(password):
     else:
         st.error("❌ **Weak Password** - Please make your password stronger! 💔")
 
-    # Display Feedback
     if feedback:
         with st.expander("🔄 **Improve Your Password** :"):
             for item in feedback:
@@ -77,33 +89,7 @@ if st.button("Check Password Strength"):
     if password:
         check_password_strength(password)
     else:
-        st.error("🚫 Please enter a password first! ❗")  # Show warning if password is empty
+        st.error("🚫 Please enter a password first! ❗")  
 
 # Footer
-st.markdown(
-    """
-    <style>
-    @keyframes gradientText {
-        0% { color: rgb(148, 11, 98); }
-        100% { color: #00c9ff; }
-    }
-    
-    .footer {
-        text-align: center;
-        margin-top: 50px;
-        padding: 20px;
-        font-size: 18px; /* Bigger Font */
-        font-weight: 900; /* Maximum Bold */
-    }
-    
-    .footer b {
-        display: inline-block;
-        font-size: 20px;
-        font-weight: 900;
-        animation: gradientText 2s infinite alternate; /* Automatic Animation */
-    }
-    </style>
-    <div class='footer'><b>Developed by ©️CodeWithAmmar</b></div>
-    """,
-    unsafe_allow_html=True
-)
+st.mark
