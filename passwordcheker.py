@@ -18,15 +18,16 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Page Title and Centered Description with Improved Styling
+# Page Title and Centered Description 
 st.title("🔐 Password Strength Checker")
 
 st.markdown(
-    "<h3 style='text-align: center; font-size: 22px; font-weight: bold;'>"
+    "<h4 style='text-align: center; font-size: 18px; font-weight: bold;'>"
     "Enter your password below to check its security level. 🔎"
-    "</h3>", 
+    "</h4>", 
     unsafe_allow_html=True
 )
+
 
 # Function to check password strength
 def check_password_strength(password):
