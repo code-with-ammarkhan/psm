@@ -1,40 +1,57 @@
 import re
 import streamlit as st
+from PIL import Image
 
-# Page Styling
+# Image se dominant color extract karna
+image_path = "/mnt/data/360_F_265252249_jjCkiNXPbonVxwZAEZ5V2mlDFcMZzSxZ.jpg"
+image = Image.open(image_path)
+image = image.resize((50, 50))  # Processing fast karne ke liye size chota karte hain
+
+# Average color calculate karna
+pixels = list(image.getdata())
+avg_color = tuple(sum(x) // len(x) for x in zip(*pixels))
+dominant_hex = "#{:02x}{:02x}{:02x}".format(*avg_color)  # Example: "#13528c"
+
+# Streamlit page configuration
 st.set_page_config(
     page_title="Password Strength Checker By Code With Ammar", 
     page_icon="🛅", 
     layout="centered"
 )
 
-# Custom CSS for Animation
+# Custom CSS: background color image ke dominant color se set, saath hi animations aur styling
 st.markdown(
-    """
+    f"""
     <style>
-    @keyframes moveText {
-        0% { transform: translateX(-10px); }
-        50% { transform: translateX(10px); }
-        100% { transform: translateX(-10px); }
-    }
-
-    .animated-heading {
+    .stApp {{
+        background-color: {dominant_hex};
+    }}
+    @keyframes moveText {{
+        0% {{ transform: translateX(-10px); }}
+        50% {{ transform: translateX(10px); }}
+        100% {{ transform: translateX(-10px); }}
+    }}
+    .animated-heading {{
         text-align: center;
         font-size: 28px;
         font-weight: bold;
         animation: moveText 2s infinite alternate ease-in-out;
         color: #333;
-    }
-
-    .stTextInput {width: 60% !important; margin: auto; }
-    .stButton button {
+    }}
+    .stTextInput {{
+        width: 60% !important; 
+        margin: auto;
+    }}
+    .stButton button {{
         width: 50%;
         background-color: #4CAF50;
         color: white;
         font-size: 16px;
         border-radius: 8px;
-    }
-    .stButton button:hover { background-color: #45a049; }
+    }}
+    .stButton button:hover {{
+        background-color: #45a049;
+    }}
     </style>
     """,
     unsafe_allow_html=True
@@ -88,17 +105,17 @@ def check_password_strength(password):
             for item in feedback:
                 st.write(item)
 
-# Password Input
+# Password Input Field
 password = st.text_input("Enter your password here: ", type="password", help="Ensure your password is strong and secure! 🔐")
 
-# Button Working
+# Button action
 if st.button("Check Password Strength"):
     if password:
         check_password_strength(password)
     else:
         st.error("🚫 Please enter a password first! ❗")  
 
-# Footer
+# Footer styling
 st.markdown(
     """
     <style>
@@ -106,7 +123,6 @@ st.markdown(
         0% { color: rgb(148, 11, 98); }
         100% { color: #00c9ff; }
     }
-    
     .footer {
         text-align: center;
         margin-top: 50px;
@@ -114,7 +130,6 @@ st.markdown(
         font-size: 16px;
         font-weight: 900;
     }
-    
     .footer b {
         display: inline-block;
         font-size: 18px;
