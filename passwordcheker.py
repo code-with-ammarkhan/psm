@@ -1,66 +1,65 @@
 import re
 import streamlit as st
-import base64
 
-# Function to Convert Image to Base64
-def get_base64(image_path):
-    with open(image_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode()
-
-# Load Background Image
-image_base64 = get_base64("/mnt/data/A_high-quality_3D-rendered_image_of_a_futuristic_d.png")
-
-# Page Styling
+# Set Page Configuration
 st.set_page_config(
-    page_title="Password Strength Checker By Code With Ammar", 
-    page_icon="🛅", 
+    page_title="Password Strength Checker By Code With Ammar",
+    page_icon="🔐",
     layout="centered"
 )
 
-# Background Image CSS
-st.markdown(
-    f"""
-    <style>
+# Custom CSS for Background Image
+page_bg_img = f"""
+<style>
     .stApp {{
-        background-image: url("data:image/png;base64,{image_base64}");
+        background-image: url("https://img.freepik.com/free-vector/secure-technology-abstract-background_23-2148331625.jpg?semt=ais_hybrid");
         background-size: cover;
-        background-position: center;
         background-repeat: no-repeat;
+        background-attachment: fixed;
     }}
-
     @keyframes moveText {{
         0% {{ transform: translateX(-10px); }}
         50% {{ transform: translateX(10px); }}
         100% {{ transform: translateX(-10px); }}
     }}
-
     .animated-heading {{
         text-align: center;
         font-size: 32px;
         font-weight: bold;
         animation: moveText 2s infinite alternate ease-in-out;
+        color: white;
     }}
+    .stTextInput {{
+        width: 60% !important;
+        margin: auto;
+    }}
+    .stButton button {{
+        width: 50%;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 18px;
+    }}
+    .stButton button:hover {{
+        background-color: #45a049;
+    }}
+</style>
+"""
 
-    .stTextInput {{ width: 60% !important; margin: auto; }}
-    .stButton button {{ width: 50%; background-color: #4CAF50; color: white; font-size: 18px; }}
-    .stButton button:hover {{ background-color: #45a049; }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# Apply Background Image
+st.markdown(page_bg_img, unsafe_allow_html=True)
 
-# Animated Page Title
+# Animated Title
 st.markdown("<h1 class='animated-heading'>🔐 Password Strength Checker</h1>", unsafe_allow_html=True)
 
-# Centered Subtitle
+# Subtitle
 st.markdown(
-    "<h4 style='text-align: center; font-size: 18px; font-weight: bold;'>"
+    "<h4 style='text-align: center; font-size: 18px; font-weight: bold; color: white;'>"
     "Enter your password below to check its security level. 🔎"
     "</h4>", 
     unsafe_allow_html=True
 )
 
-# Function to check password strength
+# Function to Check Password Strength
 def check_password_strength(password):
     score = 0
     feedback = []
@@ -97,10 +96,10 @@ def check_password_strength(password):
             for item in feedback:
                 st.write(item)
 
-# Password Input
+# Password Input Field
 password = st.text_input("Enter your password here: ", type="password", help="Ensure your password is strong and secure! 🔐")
 
-# Button Working
+# Button to Check Password Strength
 if st.button("Check Password Strength"):
     if password:
         check_password_strength(password)
@@ -122,6 +121,7 @@ st.markdown(
         padding: 20px;
         font-size: 18px;
         font-weight: 900;
+        color: white;
     }
     
     .footer b {
