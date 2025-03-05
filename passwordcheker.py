@@ -8,6 +8,10 @@ st.set_page_config(
     layout="centered"
 )
 
+# Display Image
+st.image("https://t3.ftcdn.net/jpg/02/65/25/22/360_F_265252249_jjCkiNXPbonVxwZAEZ5V2mlDFcMZzSxZ.jpg", 
+         caption="Password Security", use_column_width=True)
+
 # Custom CSS for Animation
 st.markdown(
     """
