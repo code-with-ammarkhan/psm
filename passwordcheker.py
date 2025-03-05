@@ -1,30 +1,22 @@
 import re
 import streamlit as st
-from PIL import Image
 
-# Image se dominant color extract karna
-image_path = "/mnt/data/360_F_265252249_jjCkiNXPbonVxwZAEZ5V2mlDFcMZzSxZ.jpg"
-image = Image.open(image_path)
-image = image.resize((50, 50))  # Processing fast karne ke liye size chota karte hain
-
-# Average color calculate karna
-pixels = list(image.getdata())
-avg_color = tuple(sum(x) // len(x) for x in zip(*pixels))
-dominant_hex = "#{:02x}{:02x}{:02x}".format(*avg_color)  # Example: "#13528c"
-
-# Streamlit page configuration
+# Page configuration
 st.set_page_config(
     page_title="Password Strength Checker By Code With Ammar", 
     page_icon="🛅", 
     layout="centered"
 )
 
-# Custom CSS: background color image ke dominant color se set, saath hi animations aur styling
+# Directly use the dominant color from the image (extracted as #13528c)
+background_color = "#13528c"
+
+# Custom CSS for background color and other styling
 st.markdown(
     f"""
     <style>
     .stApp {{
-        background-color: {dominant_hex};
+        background-color: {background_color};
     }}
     @keyframes moveText {{
         0% {{ transform: translateX(-10px); }}
@@ -108,7 +100,7 @@ def check_password_strength(password):
 # Password Input Field
 password = st.text_input("Enter your password here: ", type="password", help="Ensure your password is strong and secure! 🔐")
 
-# Button action
+# Button action to check password strength
 if st.button("Check Password Strength"):
     if password:
         check_password_strength(password)
