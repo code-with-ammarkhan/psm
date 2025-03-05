@@ -8,27 +8,44 @@ st.set_page_config(
     layout="centered"
 )
 
-# Background Image Setup
-background_image = "Capture.PNG"  # Ya "Capture2.PNG" jo bhi aap use karna chahain
-
+# Custom CSS for Animation
 st.markdown(
-    f"""
+    """
     <style>
-    .stApp {{
-        background: url(data:image/png;base64,{background_image}) no-repeat center center fixed;
-        background-size: cover;
-    }}
+    @keyframes moveText {
+        0% { transform: translateX(-10px); }
+        50% { transform: translateX(10px); }
+        100% { transform: translateX(-10px); }
+    }
+
+    .animated-heading {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        animation: moveText 2s infinite alternate ease-in-out;
+        color: #333;
+    }
+
+    .stTextInput {width: 60% !important; margin: auto; }
+    .stButton button {
+        width: 50%;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        border-radius: 8px;
+    }
+    .stButton button:hover { background-color: #45a049; }
     </style>
     """,
     unsafe_allow_html=True
 )
 
 # Animated Page Title
-st.markdown("<h1 style='text-align: center; color: white;'>🔐 Password Strength Checker</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='animated-heading'>🔐 Password Strength Checker</h1>", unsafe_allow_html=True)
 
 # Centered Subtitle
 st.markdown(
-    "<h4 style='text-align: center; color: white;'>"
+    "<h4 style='text-align: center; font-size: 16px; font-weight: bold;'>"
     "Enter your password below to check its security level. 🔎"
     "</h4>", 
     unsafe_allow_html=True
@@ -85,13 +102,24 @@ if st.button("Check Password Strength"):
 st.markdown(
     """
     <style>
+    @keyframes gradientText {
+        0% { color: rgb(148, 11, 98); }
+        100% { color: #00c9ff; }
+    }
+    
     .footer {
         text-align: center;
         margin-top: 50px;
         padding: 20px;
         font-size: 16px;
         font-weight: 900;
-        color: white;
+    }
+    
+    .footer b {
+        display: inline-block;
+        font-size: 18px;
+        font-weight: 900;
+        animation: gradientText 2s infinite alternate;
     }
     </style>
     <div class='footer'><b>Developed by ©️CodeWithAmmar</b></div>
