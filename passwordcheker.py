@@ -5,7 +5,7 @@ import streamlit as st
 st.set_page_config(
     page_title="Password Strength Checker By Code With Ammar", 
     page_icon="🛅", 
-    layout="centered"  # ✅ Fixed: "center" -> "centered"
+    layout="centered"
 )
 
 # Custom CSS
@@ -18,9 +18,15 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Page Title and Description
+# Page Title and Centered Description with Improved Styling
 st.title("🔐 Password Strength Checker")
-st.write("Enter your password below to check its security level. 🔎")
+
+st.markdown(
+    "<h3 style='text-align: center; font-size: 22px; font-weight: bold;'>"
+    "Enter your password below to check its security level. 🔎"
+    "</h3>", 
+    unsafe_allow_html=True
+)
 
 # Function to check password strength
 def check_password_strength(password):
